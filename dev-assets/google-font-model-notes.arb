@@ -1,0 +1,51 @@
+t.string :family
+t.string :displayName
+t.string :category
+t.number :size
+t.json :subsets #serialized array of strings
+t.json :fonts #serialized array of objects
+t.string :axes
+t.string :designers
+t.date :dateAdded
+t.number :popularity
+t.number :trending
+t.number :defaultSort
+# t.string :lastModified
+# t.string :androidFragment
+# t.string :isNoto
+# t.string :colorCapabilities
+# t.string :primaryScript
+
+{
+  "family": "ABeeZee",
+  "displayName": null,
+  "category": "Sans Serif",
+  "size": 46514,
+  "subsets": [
+    "menu",
+    "latin",
+    "latin-ext"
+  ],
+  "fonts": {
+    "400": {
+      "thickness": 5,
+      "slant": 1,
+      "width": 7,
+      "lineHeight": 1.182
+    },
+    "400i": {
+      "thickness": 5,
+      "slant": 4,
+      "width": 7,
+      "lineHeight": 1.182
+    }
+  },
+  "axes": [],
+  "designers": [
+    "Anja Meiners"
+  ],
+  "dateAdded": "2012-09-30",
+  "popularity": 123,
+  "trending": 586,
+  "defaultSort": 124
+}
