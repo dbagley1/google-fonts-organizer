@@ -1,15 +1,24 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import FontCard from "./FontCard";
+import { Input } from '@chakra-ui/react';
+import FontCategorySelect from "./FontCategorySelect";
 
 function FontList({ user }) {
   const [fonts, setFonts] = useState([]);
   const [filteredFonts, setFilteredFonts] = useState(fonts || []);
   const [search, setSearch] = useState('');
-  const [selectedCategories, setSelectedCategories] = useState(["0"]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
   // const [selectedFont, setSelectedFont] = useState(null);
 
   const [reload, setReload] = useState(false);
+  const categories = [
+    "Serif",
+    "Sans-serif",
+    "Display",
+    "Handwritten",
+    "Monospace",
+  ];
 
   useEffect(() => {
     fetch("/fonts")
@@ -23,7 +32,7 @@ function FontList({ user }) {
   useEffect(() => {
     let filterResults = fonts;
 
-    if (selectedCategories.length && !selectedCategories.includes("All")) {
+    if (selectedCategories.length) {
       filterResults = filterResults.filter((font) =>
         selectedCategories.includes(font.category)
       );
@@ -40,30 +49,19 @@ function FontList({ user }) {
     <div>
       {/* FontList */}
       {/* Search Bar */}
-      <input
+      <Input
         type="text"
         placeholder="Search"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-
-      <select
-        multiple
-        onChange={(e) => setSelectedCategories([...e.target.selectedOptions].map(e => e.value))}
-      >
-        <option value="All">All</option>
-        <option value="Serif">Serif</option>
-        <option value="Sans Serif">Sans-serif</option>
-        <option value="Display">Display</option>
-        <option value="Handwritten">Handwritten</option>
-        <option value="Monospace">Monospace</option>
-      </select>
+      <FontCategorySelect options={categories} label="Categories" onChange={setSelectedCategories} />
 
       <div className="row">
         {/* Filtered */}
         {filteredFonts.map((font, i) => (
-          <div className="col-md-4">
-            <FontCard font={font} key={font.id} />
+          <div className="col-md-4 font-card" key={font.id}>
+            <FontCard font={font} />
           </div>
         ))}
       </div>
